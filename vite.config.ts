@@ -7,6 +7,14 @@ export default defineConfig((configEnv) => {
 
   return {
     plugins: [react()],
+    server: {
+      watch: {
+        usePolling: true,
+      },
+      host: true, 
+      strictPort: true,
+      port: 5173, 
+    },
     resolve: {
       alias: {
         app: resolve(__dirname, "src", "app"),
