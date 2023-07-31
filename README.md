@@ -6,13 +6,13 @@ React boilerplate template with Vite, Typescript and Tailwind
 Install the dependencies:
 
 ```sh
-npm install
+yarn install
 ```
 
 Run dev server:
 
 ```sh
-npm install
+npm start
 ```
 
 ## Run tests

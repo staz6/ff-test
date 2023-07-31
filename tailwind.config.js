@@ -1,4 +1,4 @@
 module.exports = {
-  content: ["./*.html", "./src/**/*.css"],
-  plugins: [require("@tailwindcss/forms")],
+  content: ["./*.html", "./src/**/*.css", "./node_modules/flowbite/**/*.js"],
+  plugins: [require("@tailwindcss/forms"),require('flowbite/plugin')],
 };
