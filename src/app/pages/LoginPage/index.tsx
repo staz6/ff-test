@@ -1,6 +1,11 @@
 import { Button, TextInput } from "flowbite-react";
+import { useState } from "react";
+import { useAuth } from "../../../infrastructure/context/AuthContext";
 
 const LoginPage = () => {
+  const { login } = useAuth();
+  const [userName, setUserName] = useState<string>("");
+  
   return (
     <section className="flex bg-gray-50 dark:bg-gray-900 w-full h-screen">
       <div
@@ -13,9 +18,14 @@ const LoginPage = () => {
               Sign in to your account
             </h1>
             <div>
-              <TextInput placeholder="username" />
+              <TextInput
+                placeholder="username"
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+              />
             </div>
-            <Button type="submit" className="w-44">
+            <Button type="submit" className="w-44" onClick={()=>{login(userName)}}>
               Login
             </Button>
           </div>
