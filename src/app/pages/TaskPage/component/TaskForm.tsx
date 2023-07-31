@@ -1,26 +1,31 @@
 import { useForm } from 'react-hook-form';
-import { TextInput } from 'flowbite-react';
+import { TextInput, Button } from 'flowbite-react';
 
-function TaskForm() {
-  const { register, handleSubmit, reset } = useForm();
+interface IFormInput {
+    title: string;
+    description: string;
+}
+interface TaskFormProps {
+    addTask: (title: string, description: string) => void;
+}
 
-  const onSubmit = () => {
+const TaskForm : React.FC<TaskFormProps> = ({
+    addTask
+}) => {
+    const { register, handleSubmit, reset } = useForm<IFormInput>();
+
+  const onSubmit = (data: IFormInput) => {
+    addTask(data.title,data.description)
     reset();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Title
-        <TextInput {...register('title', { required: true })} />
-      </label>
+    <form className='flex max-w-md flex-col gap-4 mt-2' onSubmit={handleSubmit(onSubmit)}>
+      <TextInput placeholder='Title' {...register('title', { required: true })} />
 
-      <label>
-        Description
-        <input {...register('description')} />
-      </label>
+      <TextInput placeholder='Description' sizing="lg" {...register('description')} />
 
-      <button type="submit">Add Task</button>
+      <Button type="submit" className="max-w-[125px]">Add Task</Button>
     </form>
   );
 }
