@@ -1,4 +1,8 @@
+import TaskForm from "./component/TaskForm";
+
 const TaskPage = () => {
-  return <h1> Task Page</h1>;
+  return (
+    <TaskForm/>
+  );
 };
 export default TaskPage;
