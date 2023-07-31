@@ -1,5 +1,11 @@
 import { Card, Checkbox } from "flowbite-react";
-import { DragDropContext, Droppable, Draggable, DropResult, DraggableProvided } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+  DraggableProvided,
+} from "react-beautiful-dnd";
 import { ITask } from "../interface/ITask";
 import { AiFillDelete } from "react-icons/ai";
 interface TaskListProp {
@@ -9,26 +15,35 @@ interface TaskListProp {
   onDragEnd: (sourceIndex: number, destinationIndex: number) => void;
 }
 
-const TaskList: React.FC<TaskListProp> = ({ data, onStatusChange, onDelete, onDragEnd }) => {
-    const onDragEndResult = (result: DropResult) => {
-        if (!result.destination) {
-          return;
-        }
-        onDragEnd(result.source.index, result.destination.index);
-      };
+const TaskList: React.FC<TaskListProp> = ({
+  data,
+  onStatusChange,
+  onDelete,
+  onDragEnd,
+}) => {
+  const onDragEndResult = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+    onDragEnd(result.source.index, result.destination.index);
+  };
   return (
     <>
-           <Card>
+      <Card>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="default-heading">Task List</h2>
         </div>
         <DragDropContext onDragEnd={onDragEndResult}>
           <Droppable droppableId="taskList">
-            {(provided: DraggableProvided) => (
+            {(provided: any) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {data.map((item, index) =>
                   !item.isDeleted ? (
-                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
                       {(provided: DraggableProvided) => (
                         <ul
                           ref={provided.innerRef}
