@@ -2,7 +2,7 @@ import { useState } from "react";
 import TaskForm from "./component/TaskForm";
 import { ITask } from "./interface/ITask";
 import TaskList from "./component/TaskList";
-import { randomUUID } from "crypto";
+import { useSnackbar } from "notistack";
 
 const mockTasks: ITask[] = [
   {
@@ -31,20 +31,24 @@ const mockTasks: ITask[] = [
 
 
 const TaskPage: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [tasks, setTasks] = useState<ITask[]>(mockTasks);
   const addTask = (title: string, description: string) => {
     const newTask = { id: Math.random().toString(36).substring(2),title, description, completed: false, isDeleted: false };
     setTasks([...tasks, newTask]);
+    enqueueSnackbar('Task added successfully',{variant:"success"})
   };
   const onStatusChange = (id: string) => {
     setTasks(tasks.map(task => 
       task.id === id ? {...task, completed: !task.completed} : task
     ));
+    enqueueSnackbar('Task status change successfully',{variant:"success"})
   }
   const onDelete = (id: string) => {
     setTasks(tasks.map(task => 
       task.id === id ? {...task, isDeleted: true} : task
     ));
+    enqueueSnackbar('Task delete',{variant:"info"})
   }
   const onDragEnd = (sourceIndex: number, destinationIndex: number) => {
     setTasks((prev) => {
