@@ -46,13 +46,22 @@ const TaskPage: React.FC = () => {
       task.id === id ? {...task, isDeleted: true} : task
     ));
   }
+  const onDragEnd = (sourceIndex: number, destinationIndex: number) => {
+    setTasks((prev) => {
+      const copiedItems = Array.from(prev);
+      const [removed] = copiedItems.splice(sourceIndex, 1);
+      copiedItems.splice(destinationIndex, 0, removed);
+
+      return copiedItems;
+    });
+  };
   
   return (
     <div className="container mx-auto p-4">
       <h1 className="default-heading">Add task</h1>
       <TaskForm addTask={addTask}/>
       <br/>
-      <TaskList data={tasks} onStatusChange={onStatusChange} onDelete={onDelete}/>
+      <TaskList data={tasks} onStatusChange={onStatusChange} onDelete={onDelete} onDragEnd={onDragEnd}/>
     </div>
   );
 };
