@@ -4,5 +4,5 @@ export interface ITask {
     description: string;
     completed: boolean;
     isDeleted: boolean;
-    userGroup: string;
+    userGroup: string | undefined;
   }

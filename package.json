@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Project",
   "license": "MIT",
-  "type": "module",
   "engines": {
     "node": ">=14",
     "yarn": ">=1.22.5"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite & node server.mjs",
     "build": "vite build",
     "test": "jest"
   },

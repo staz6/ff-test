@@ -1,40 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskForm from "./component/TaskForm";
-import { ITask } from "./interface/ITask";
 import TaskList from "./component/TaskList";
 import { useSnackbar } from "notistack";
-
-const mockTasks: ITask[] = [
-  {
-    id: '1',
-    title: 'Task 1',
-    description: 'This is the description for Task 1.',
-    completed: false,
-    isDeleted: false,
-  },
-  {
-    id: '2',
-    title: 'Task 2',
-    description: 'This is the description for Task 2.',
-    completed: true,
-    isDeleted: false,
-  },
-  {
-    id: '3',
-    title: 'Task 3',
-    description: 'This is the description for Task 3.',
-    completed: false,
-    isDeleted: false,
-  },
-];
-
+import { useQuery } from "react-query";
+import { ITask } from "../../../interface/ITask";
+import { useAuth } from "../../../infrastructure/context/AuthContext";
+import { getTasks } from "../../../infrastructure/endpoints/api";
 
 
 const TaskPage: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const [tasks, setTasks] = useState<ITask[]>(mockTasks);
+  const { user } = useAuth();
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(user){
+        const data = await getTasks(user?.userGroup);
+        setTasks(data);
+      }
+    };
+    fetchData();
+  }, [user?.userGroup]);
+
   const addTask = (title: string, description: string) => {
-    const newTask = { id: Math.random().toString(36).substring(2),title, description, completed: false, isDeleted: false };
+    const newTask = { id: Math.random().toString(36).substring(2),title, description, completed: false, isDeleted: false, userGroup: user?.userGroup };
     setTasks([...tasks, newTask]);
     enqueueSnackbar('Task added successfully',{variant:"success"})
   };

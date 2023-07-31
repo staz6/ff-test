@@ -50,7 +50,8 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/tasks', (req, res) => {
-  const { userGroup } = req.params;
+  const { userGroup } = req.query;
+  console.log(req)
   const userTasks = tasks.filter(task => task.userGroup === userGroup);
   res.json(userTasks);
 });

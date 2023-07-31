@@ -8,7 +8,7 @@ export const loginApi = async (username: string): Promise<IUser> => {
   return data;
 };
 
-export const getTask = async (userGroup: string): Promise<ITask[]> => {
-  const { data } = await axios.get<ITask[]>('/tasks', { params: { userGroup } });
+export const getTasks = async (userGroup: string): Promise<ITask[]> => {
+  const { data } = await axios.get<ITask[]>('http://localhost:3000/tasks', { params: { userGroup } });
   return data;
 };
