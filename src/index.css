@@ -8,3 +8,6 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+.default-heading{
+  @apply text-xl font-bold leading-none text-gray-900 dark:text-white
+}
