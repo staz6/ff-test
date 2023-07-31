@@ -1,5 +1,5 @@
-# react-vite-tw-boilerplate
-React boilerplate template with Vite, Typescript and Tailwind
+# ff-test
+use either user1 or user2 to log in
 
 ## Usage
 
@@ -12,13 +12,13 @@ yarn install
 Run dev server:
 
 ```sh
-npm start
+yarn start
 ```
 
 ## Run tests
 
 ```sh
-npm test
+yarn test
 ```
 
 ## Docker

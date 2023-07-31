@@ -19,7 +19,7 @@ const LoginPage = () => {
             </h1>
             <div>
               <TextInput
-                placeholder="username"
+                placeholder="username (user1, user2)"
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
